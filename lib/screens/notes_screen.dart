@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutterui/services/Database.dart';
 import '../services/navbar.dart';
 
 class NotesScreen extends StatelessWidget {
@@ -30,7 +31,7 @@ class Notes extends StatelessWidget {
    bool isDark = false;
 
   hexStringToHexInt(String hex) {
-    hex = hex.length == 6 ? 'ff' + hex : hex;
+    hex = hex.length == 6 ? '11' + hex : hex;
     int val = int.parse(hex, radix: 16);
     return val;
   }
@@ -71,8 +72,8 @@ class Notes extends StatelessWidget {
             width: MediaQuery.of(context).size.width / 2,
             height: 100.0,
             child: GestureDetector(
-              onTap: (){
-                print("clicked");
+              onLongPress: (){
+                Database().deleteNotes(note.documentID);
               },
               child: Card(
                 semanticContainer: true,

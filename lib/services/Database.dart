@@ -7,4 +7,7 @@ class Database{
       if (text != "")
       await  _firestore.collection('notes').add({'note': text, 'color': color});
   }
+  void deleteNotes(String id) async{
+    await _firestore.collection('notes').document(id).delete();
+  }
 }

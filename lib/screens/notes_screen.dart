@@ -31,7 +31,7 @@ class Notes extends StatelessWidget {
    bool isDark = false;
 
   hexStringToHexInt(String hex) {
-    hex = hex.length == 6 ? '11' + hex : hex;
+    hex = "B3" + hex.substring(2, hex.length);
     int val = int.parse(hex, radix: 16);
     return val;
   }

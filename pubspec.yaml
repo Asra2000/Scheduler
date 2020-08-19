@@ -23,6 +23,7 @@ dependencies:
   intl: ^0.16.1
   cloud_firestore: ^0.13.7
   firebase_core: ^0.4.5
+  firebase_messaging: ^6.0.16
 
 
   cupertino_icons: ^0.1.3

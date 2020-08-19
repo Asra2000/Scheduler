@@ -8,6 +8,7 @@ import '../services/time.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import '../services/navbar.dart';
 import 'package:audioplayers/audio_cache.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class AlarmScreen extends StatefulWidget {
 
@@ -16,11 +17,20 @@ class AlarmScreen extends StatefulWidget {
 }
 
 class _AlarmScreenState extends State<AlarmScreen> {
+
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+
   TimeOfDay _time = TimeOfDay.now();
   final player = AudioCache();
   AudioPlayer audioplayer = AudioPlayer(); // create this
   TimeOfDay picked;
   Timer timer;
+  
+  _getToken(){
+    _firebaseMessaging.getToken().then((value) => print(value));
+  }
+  
+  
   void playSound(TimeHandler alarm) async{
      audioplayer = await  player.loop('music/note2.wav', volume: 1, isNotification: true, stayAwake: true);
   }
@@ -117,6 +127,7 @@ class _AlarmScreenState extends State<AlarmScreen> {
   void initState() {
     super.initState();
     timer = Timer.periodic(Duration(seconds: 30), (timer) => checkTime());
+    _getToken();
   }
   @override
   void dispose() {
